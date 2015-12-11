@@ -12,10 +12,6 @@ module.exports = (webdriverConf, customBefore) ->
     addCustomCommands = require './commands'
     waitServer = require './waitServer'
 
-    chai.Should()
-    chai.use chaiAsPromised
-    chaiAsPromised.transferPromiseness = browser.transferPromiseness
-
     for groupName, value of webdriverConf.browsers
       if value in [1, true]
         global[groupName] = webdriverio.remote webdriverConf
@@ -28,6 +24,10 @@ module.exports = (webdriverConf, customBefore) ->
           res
       else
         throw new Error "Wrong number of instances specified for '#{ groupName }' browser group. It must be a number (for multiremote testing) or 'true' (for a single browser)"
+
+    chai.Should()
+    chai.use chaiAsPromised
+    chaiAsPromised.transferPromiseness = global[ Object.keys(webdriverConf.browsers)[0] ].transferPromiseness
 
     for groupName, value of webdriverConf.browsers
       addCustomCommands global[groupName]
