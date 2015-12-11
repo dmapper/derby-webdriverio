@@ -21,7 +21,7 @@ module.exports = (customConfig) ->
     startCommand: 'npm start'
     env:
       MONGO_URL: 'mongodb://localhost:27017/test'
-      PORT: config.baseUrl.match(/:(\d+)[^:]/)?[1] || 80
+      PORT: config.baseUrl.match(/:(\d+)/)?[1] || 80
     waitServer:
       timeout: 10 * 1000
       interval: 800
