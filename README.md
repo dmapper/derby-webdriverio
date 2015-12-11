@@ -21,7 +21,7 @@ window.app = app if window? # app must be accessible from the client
 app.use require('derby-webdriverio/renderReady')
 ```
 
-Create `wdio.conf.js` in the project root folder:
+Create `wdio.conf.js` in project's root folder:
 
 ```js
 // wdio.conf.js
