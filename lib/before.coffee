@@ -50,7 +50,6 @@ module.exports = (webdriverConf, customBefore) ->
       undefined
     # Wait for server to start
     .then ->
-      webdriverConf.server.waitServer.req ?=
       waitServer webdriverConf.server.waitServer
     .then ->
       Bluebird.mapSeries Object.keys(webdriverConf.browsers), (groupName) ->
