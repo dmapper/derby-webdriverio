@@ -16,7 +16,7 @@ module.exports = (options) ->
       interval: 800
       print: true
 
-    if not options.req or not options.net
+    if not options.req and not options.net
       return reject '[derby-webdriverio] requires the req or net option'
 
     client = null
