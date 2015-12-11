@@ -9,6 +9,10 @@ module.exports = (webdriverConf, customAfter) ->
       Bluebird.mapSeries Object.keys(webdriverConf.browsers), (groupName) ->
         global[groupName].end()
     .then ->
-      kill global.__runningServer
+      new Bluebird (resolve, reject) ->
+        console.log 'Kill Server'
+        kill global.__runningServer, (code, signal) ->
+          console.log 'KILLED SERVER!'
+          resolve()
     .then ->
       customAfter?(failures, pid)
