@@ -1,17 +1,17 @@
-Bluebird = require 'bluebird'
-natural = require 'natural'
-nounInflector = new natural.NounInflector()
-shell = require 'shelljs'
-_ = require 'lodash'
-chai = require 'chai'
-chaiAsPromised = require 'chai-as-promised'
-webdriverio = require 'webdriverio'
-global.X = require './xpath'
-addCustomCommands = require './commands'
-waitServer = require './waitServer'
-
 module.exports = (webdriverConf, customBefore) ->
   ->
+    Bluebird = require 'bluebird'
+    natural = require 'natural'
+    nounInflector = new natural.NounInflector()
+    shell = require 'shelljs'
+    _ = require 'lodash'
+    chai = require 'chai'
+    chaiAsPromised = require 'chai-as-promised'
+    webdriverio = require 'webdriverio'
+    global.X = require './xpath'
+    addCustomCommands = require './commands'
+    waitServer = require './waitServer'
+
     chai.Should()
     chai.use chaiAsPromised
     chaiAsPromised.transferPromiseness = browser.transferPromiseness

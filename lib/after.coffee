@@ -1,8 +1,8 @@
-Bluebird = require 'bluebird'
-kill = require './kill'
-
 module.exports = (webdriverConf, customAfter) ->
-  ->
+  (failures, pid) ->
+    Bluebird = require 'bluebird'
+    kill = require './kill'
+
     Bluebird
     .resolve()
     .then ->
@@ -11,4 +11,4 @@ module.exports = (webdriverConf, customAfter) ->
     .then ->
       kill global.__runningServer
     .then ->
-      customAfter?()
+      customAfter?(failures, pid)
