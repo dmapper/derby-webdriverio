@@ -23,7 +23,7 @@ module.exports = (options) ->
     client = null
 
     callback = once (isTimeout) ->
-      console.log() # print new line
+      console.log() if options.print # print new line
       if isTimeout
         console.error '[derby-webdriverio] server timeout'
         return reject()
