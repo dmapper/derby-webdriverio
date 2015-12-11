@@ -75,6 +75,7 @@ If you want to run it as `npm test` you can add the following script to your `pa
 },
 ```
 
+---
 
 ### `.*AndWait()`
 
@@ -85,6 +86,7 @@ They do the same action and wait for derby page to fully load after that.
 ##### `.clickAndWait()`
 ##### `.submitFormAndWait()`
 
+---
 
 ### model
 
@@ -115,6 +117,7 @@ it 'check title', ->
 
 ##### all other get/set methods are supported -- `.modelAdd`, `.modelPop`, etc.
 
+---
 
 ### history
 
@@ -133,6 +136,7 @@ browser
 
 Refresh the page using `app.history.refresh` on the client.
 
+---
 
 ### `X()` - XPath function
 
@@ -150,6 +154,7 @@ browser
 .click X 'form.main button', 'Submit'
 ```
 
+---
 
 ### Chai shorthands
 
