@@ -12,9 +12,9 @@ module.exports = (customConfig) ->
       './test/e2e/**/_*.js'
       './test/e2e/**/_*.coffee'
     ]
-    # capabilities should always be []
+    # capabilities should always be {}
     # Use 'browsers' and 'desiredCapabilities' instead
-    capabilities: []
+    capabilities: {}
 
   # Check if coffee-script is being used in the main project
   hasCoffee = true
