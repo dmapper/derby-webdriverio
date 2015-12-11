@@ -75,22 +75,22 @@ If you want to run it as `npm test` you can add the following script to your `pa
 },
 ```
 
-## `.*AndWait()`
+### `.*AndWait()`
 
 These methods accept the same arguments as the original methods.
 They do the same action and wait for derby page to fully load after that.
 
-### `.urlAndWait()`
-### `.clickAndWait()`
-### `.submitFormAndWait()`
+#### `.urlAndWait()`
+#### `.clickAndWait()`
+#### `.submitFormAndWait()`
 
-## model
+### model
 
 All racer `get-` and `set-` methods are available.
 
 Couple of examples:
 
-### `.modelGet()`
+#### `.modelGet()`
 
 ```coffee
 browser
@@ -99,7 +99,7 @@ browser
   @urlAndWait '/profile/' + userId
 ```
 
-### `.modelSet()`
+#### `.modelSet()`
 
 ```coffee
 it 'check title', ->
@@ -111,11 +111,11 @@ it 'check title', ->
     title.should.equal newTitle
 ```
 
-### all other get/set methods are supported -- `.modelAdd`, `.modelPop`, etc.
+#### all other get/set methods are supported -- `.modelAdd`, `.modelPop`, etc.
 
-## history
+### history
 
-### `.historyPush(path)`
+#### `.historyPush(path)`
 
 Do `app.history.push` on the client and wait for the page to fully load.
 
@@ -126,16 +126,16 @@ browser
 .should.eventually.equal 'My Profile'
 ```
 
-### `.historyRefresh()`
+#### `.historyRefresh()`
 
 Refresh the page using `app.history.refresh` on the client.
 
-## `X()` - XPath function
+### `X()` - XPath function
 
 XPath helper function, provides better support for querying text nodes.
 Available globally as `X`
 
-### `X([selector], text)`
+#### `X([selector], text)`
 
 Returns an XPath selector to find a node which holds `text`.
 Optionally you can specify a CSS3 selector to narrow the lookup.
@@ -146,12 +146,12 @@ browser
 .click X 'form.main button', 'Submit'
 ```
 
-## Chai shorthands
+### Chai shorthands
 
 A bunch of useful shorthand methods to test things.
 All of them accept the arguments which will be passed to `X()` function.
 
-### `shouldExist()`
+#### `shouldExist()`
 
 ```coffee
 browser
@@ -160,11 +160,11 @@ browser
 .shouldExist 'Welcome to my Website'
 ```
 
-### `shouldNotExist()`
-### `shouldBeVisible()`
-### `shouldNotBeVisible()`
+#### `shouldNotExist()`
+#### `shouldBeVisible()`
+#### `shouldNotBeVisible()`
 
-### `shouldExecute`
+#### `shouldExecute`
 
 Accepts the same arguments as `.execute()` and checks that its return value
 equals `true`
