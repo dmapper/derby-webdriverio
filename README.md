@@ -5,7 +5,7 @@
 ## Installation
 
 ```
-npm i --save webdriverio derby-webdriverio
+npm i --save derby-webdriverio
 ```
 
 ## Usage
