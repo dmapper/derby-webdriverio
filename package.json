@@ -36,7 +36,7 @@
     "mocha": "~2.3",
     "natural": "^0.2.1",
     "shelljs": "^0.5.3",
-    "webdriverio": "~3.2",
+    "webdriverio": "~3.3",
     "once": "^1.3.2",
     "request": "~2.30.0"
   },
@@ -44,8 +44,8 @@
     "derby-dev-helpers": "^0.1.2"
   },
   "peerDependencies": {
-    "webdriverio": "*",
-    "mocha": "*",
-    "chai": "*"
+    "webdriverio": "~3.3",
+    "mocha": "~2.3",
+    "chai": "~3.4"
   }
 }

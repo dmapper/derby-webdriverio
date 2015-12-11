@@ -27,7 +27,13 @@ module.exports = (webdriverConf, customBefore) ->
 
     chai.Should()
     chai.use chaiAsPromised
-    chaiAsPromised.transferPromiseness = global[ Object.keys(webdriverConf.browsers)[0] ].transferPromiseness
+
+    # Transfer promiseness
+    # This has to happen on 'global.browser' because webdriverio has
+    # a bunch of hardcoded stuff for it.
+    unless 'browser' in Object.keys(webdriverConf.browsers)
+      global.browser = global[ Object.keys(webdriverConf.browsers)[0] ]
+    chaiAsPromised.transferPromiseness = global.browser.transferPromiseness
 
     for groupName, value of webdriverConf.browsers
       addCustomCommands global[groupName]
