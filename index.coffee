@@ -55,12 +55,6 @@ module.exports = (customConfig) ->
   config.before = require('./lib/before')(config, config.before)
 
   # Destroy browsers
-  config.after = do (customAfter = config.after) ->
-    (failures, pid) ->
-      Bluebird = require 'bluebird'
-      Bluebird.mapSeries Object.keys(config.browsers), (groupName) ->
-        global[groupName].end()
-      .then ->
-        customAfter?(failures, pid)
+  config.after = require('./lib/after')(config, config.after)
 
   config

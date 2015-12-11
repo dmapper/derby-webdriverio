@@ -46,7 +46,7 @@ module.exports = (webdriverConf, customBefore) ->
       envStr = for key, value of webdriverConf.server.env
         "#{ key }=#{ value }"
       envStr = envStr.join ' '
-      shell.exec "#{ envStr } #{ webdriverConf.server.startCommand }", async: true
+      global.__runningServer = shell.exec "#{ envStr } #{ webdriverConf.server.startCommand }", async: true
       undefined
     # Wait for server to start
     .then ->
