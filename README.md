@@ -2,6 +2,12 @@
 
 > Webdriver.io for Derby.js
 
+## Installation
+
+```
+npm i --save webdriverio derby-webdriverio
+```
+
 ## Usage
 
 In your derby app index file:
@@ -55,10 +61,19 @@ exports.config = require('derby-webdriverio')({
 })
 ```
 
-
+To run your tests:
 
 ```
-browsers: {
+./node_modules/.bin/wdio
+```
+
+If you want to run it as `npm test` you can add the following script to your `package.json`:
+
+```
+"scripts": {
+  "test": "wdio",
+},
+```
 
 ## .*AndWait
 
@@ -115,7 +130,7 @@ browser
 
 Refresh the page using `app.history.refresh` on the client.
 
-## `X` XPath function
+## `X()` - XPath function
 
 XPath helper function, provides better support for querying text nodes.
 Available globally as `X`
