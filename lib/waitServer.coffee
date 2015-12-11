@@ -17,23 +17,28 @@ module.exports = (options) ->
       print: true
 
     if not options.req and not options.net
-      return reject '[derby-webdriverio] requires the req or net option'
+      console.error '[derby-webdriverio] requires the req or net option'
+      return reject()
 
     client = null
 
     callback = once (isTimeout) ->
+      console.log() # print new line
       if isTimeout
-        return reject '[derby-webdriverio] server timeout'
+        console.error '[derby-webdriverio] server timeout'
+        return reject()
       console.log '[derby-webdriverio] Server is ready.' if options.print
       resolve()
 
     wait = (callback) ->
+      process.stdout.write '[derby-webdriverio] Waiting for the server' if options.print
       tryConnection = ->
-        console.log '[derby-webdriverio] Waiting for the server ...' if options.print
+        process.stdout.write '.' if options.print
         if options.req
           # if options.req use request
           request options.req, (err) ->
-            return callback() unless err
+            unless err
+              return callback()
             setTimeout tryConnection, options.interval
         else if options.net
           # if options.net use net.connect
