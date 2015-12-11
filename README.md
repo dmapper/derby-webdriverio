@@ -75,7 +75,7 @@ If you want to run it as `npm test` you can add the following script to your `pa
 },
 ```
 
-## .*AndWait
+## .*AndWait()
 
 These methods accept the same arguments as the original methods.
 They do the same action and wait for derby page to fully load after that.
