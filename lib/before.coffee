@@ -1,16 +1,17 @@
 Bluebird = require 'bluebird'
 natural = require 'natural'
 nounInflector = new natural.NounInflector()
+shell = require 'shelljs'
+_ = require 'lodash'
+chai = require 'chai'
+chaiAsPromised = require 'chai-as-promised'
+webdriverio = require 'webdriverio'
+global.X = require './xpath'
+addCustomCommands = require './commands'
+waitServer = require './waitServer'
 
 module.exports = (webdriverConf, customBefore) ->
   ->
-    _ = require 'lodash'
-    chai = require 'chai'
-    chaiAsPromised = require 'chai-as-promised'
-    webdriverio = require 'webdriverio'
-    global.X = require './xpath'
-    addCustomCommands = require './commands'
-
     chai.Should()
     chai.use chaiAsPromised
     chaiAsPromised.transferPromiseness = browser.transferPromiseness
@@ -32,7 +33,25 @@ module.exports = (webdriverConf, customBefore) ->
       addCustomCommands global[groupName]
 
     Bluebird
-    .resolve customBefore?()
+    .resolve()
+    # Clean test DB
+    .then ->
+      dbName = webdriverConf.server.env.MONGO_URL.match(/\/([^\/]*)$/)?[1]
+      shell.exec "mongo #{ dbName } --eval \"db.dropDatabase();\""
+    # Run custom before hook
+    .then ->
+      customBefore?()
+    # Run application
+    .then ->
+      envStr = for key, value of webdriverConf.server.env
+        "#{ key }=#{ value }"
+      envStr = envStr.join ' '
+      shell.exec "#{ envStr } #{ webdriverConf.server.startCommand }", async: true
+      undefined
+    # Wait for server to start
+    .then ->
+      webdriverConf.server.waitServer.req ?=
+      waitServer webdriverConf.server.waitServer
     .then ->
       Bluebird.mapSeries Object.keys(webdriverConf.browsers), (groupName) ->
         global[groupName].init()

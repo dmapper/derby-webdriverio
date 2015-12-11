@@ -16,6 +16,18 @@ module.exports = (customConfig) ->
     # Use 'browsers' and 'desiredCapabilities' instead
     capabilities: {}
 
+  config.server ?= {}
+  _.defaultsDeep config.server,
+    startCommand: 'npm start'
+    env:
+      MONGO_URL: 'mongodb://localhost:27017/test'
+      PORT: config.baseUrl.match(/:(\d+)[^:]/)?[1] || 80
+    waitServer:
+      timeout: 10 * 1000
+      interval: 800
+      print: true
+      req: config.baseUrl
+
   # Check if coffee-script is being used in the main project
   hasCoffee = true
   try
