@@ -9,7 +9,7 @@ In your derby app index file:
 ```coffee
 # app/index.coffee
 
-# app = require('derby').createApp 'foobar', __filename
+app = require('derby').createApp 'foobar', __filename
 
 window.app = app if window? # app must be accessible from the client
 app.use require('derby-webdriverio/renderReady')
