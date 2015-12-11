@@ -75,6 +75,7 @@ If you want to run it as `npm test` you can add the following script to your `pa
 },
 ```
 
+
 ### `.*AndWait()`
 
 These methods accept the same arguments as the original methods.
@@ -83,6 +84,7 @@ They do the same action and wait for derby page to fully load after that.
 ##### `.urlAndWait()`
 ##### `.clickAndWait()`
 ##### `.submitFormAndWait()`
+
 
 ### model
 
@@ -113,6 +115,7 @@ it 'check title', ->
 
 ##### all other get/set methods are supported -- `.modelAdd`, `.modelPop`, etc.
 
+
 ### history
 
 ##### `.historyPush(path)`
@@ -130,6 +133,7 @@ browser
 
 Refresh the page using `app.history.refresh` on the client.
 
+
 ### `X()` - XPath function
 
 XPath helper function, provides better support for querying text nodes.
@@ -145,6 +149,7 @@ browser
 # Click on a `<button>` within `<form class='main'>` that has `Submit` text.
 .click X 'form.main button', 'Submit'
 ```
+
 
 ### Chai shorthands
 
