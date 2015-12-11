@@ -1,0 +1,46 @@
+{
+  "name": "derby-webdriverio",
+  "version": "0.0.1",
+  "description": "Webdriver.io for Derby.js",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepublish": "derby-dev-helpers compile -c",
+    "postpublish": "derby-dev-helpers revert -c"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/dmapper/derby-webdriverio.git"
+  },
+  "keywords": [
+    "webdriver",
+    "webdriverio",
+    "derby",
+    "derbyjs",
+    "test",
+    "testing",
+    "client"
+  ],
+  "author": "Pavel Zhukov <cray0000@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dmapper/derby-webdriverio/issues"
+  },
+  "homepage": "https://github.com/dmapper/derby-webdriverio",
+  "dependencies": {
+    "bluebird": "^3.0.6",
+    "chai": "^3.4.1",
+    "chai-as-promised": "^5.1.0",
+    "css-to-xpath": "0.0.3",
+    "lodash": "^3.8.0",
+    "mocha": "^2.3.4",
+    "natural": "^0.2.1",
+    "webdriverio": "~3.2"
+  },
+  "devDependencies": {
+    "derby-dev-helpers": "^0.1.2"
+  },
+  "peerDependencies": {
+    "webdriverio": "*"
+  }
+}
