@@ -29,11 +29,11 @@
   "homepage": "https://github.com/dmapper/derby-webdriverio",
   "dependencies": {
     "bluebird": "^3.0.6",
-    "chai": "^3.4.1",
+    "chai": "~3.4",
     "chai-as-promised": "^5.1.0",
     "css-to-xpath": "0.0.3",
     "lodash": "^3.8.0",
-    "mocha": "^2.3.4",
+    "mocha": "~2.3",
     "natural": "^0.2.1",
     "webdriverio": "~3.2"
   },
@@ -41,6 +41,8 @@
     "derby-dev-helpers": "^0.1.2"
   },
   "peerDependencies": {
-    "webdriverio": "*"
+    "webdriverio": "*",
+    "mocha": "*",
+    "chai": "*"
   }
 }

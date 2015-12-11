@@ -5,12 +5,12 @@ module.exports = (customConfig) ->
 
   config = _.defaults {}, customConfig, webdriverDefaultConf,
     specs: [
-      process.cwd() + '/test/e2e/**/*.js'
-      process.cwd() + '/test/e2e/**/*.coffee'
+      './test/e2e/**/*.js'
+      './test/e2e/**/*.coffee'
     ]
     exclude: [
-      process.cwd() + '/test/e2e/**/_*.js'
-      process.cwd() + '/test/e2e/**/_*.coffee'
+      './test/e2e/**/_*.js'
+      './test/e2e/**/_*.coffee'
     ]
     # capabilities should always be []
     # Use 'browsers' and 'desiredCapabilities' instead
