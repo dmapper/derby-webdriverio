@@ -10,6 +10,12 @@ module.exports = (webdriverConf, customAfter) ->
         global[groupName].end()
     .then ->
       console.log 'Kill Server'
-      global.__runningServer.kill()
+      new Bluebird (resolve, reject) ->
+        return resolve() if global.__runningServerExited
+        global.__runningServerExited.on 'exit', ->
+          console.log 'Server Exited'
+          resolve()
+        console.log 'Send kill signal'
+        global.__runningServer.kill()
     .then ->
       customAfter?(failures, pid)

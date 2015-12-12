@@ -61,6 +61,7 @@ module.exports = (webdriverConf, customBefore) ->
         console.log data
       global.__runningServer.on 'exit', (code) ->
         'Server exited with code ' + code
+        global.__runningServerExited = true
       undefined
     # Wait for server to start
     .then ->
