@@ -55,6 +55,12 @@ module.exports = (webdriverConf, customBefore) ->
         "#{ key }=#{ value }"
       envStr = envStr.join ' '
       global.__runningServer = exec "#{ envStr } #{ webdriverConf.server.startCommand }"
+      global.__runningServer.stdout.on 'data', (data) ->
+        console.log data
+      global.__runningServer.stderr.on 'data', (data) ->
+        console.log data
+      global.__runningServer.on 'exit', (code) ->
+        'Server exited with code ' + code
       undefined
     # Wait for server to start
     .then ->
