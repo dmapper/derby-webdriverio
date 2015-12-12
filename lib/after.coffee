@@ -16,6 +16,6 @@ module.exports = (webdriverConf, customAfter) ->
           console.log 'Server Exited'
           resolve()
         console.log 'Send kill signal'
-        global.__runningServer.kill('SIGKILL')
+        process.kill(-global.__runningServer.pid)
     .then ->
       customAfter?(failures, pid)

@@ -8,6 +8,7 @@ webdriverio = require 'webdriverio'
 global.X = require './xpath'
 addCustomCommands = require './commands'
 waitServer = require './waitServer'
+spawn = require('child_process').spawn
 exec = require('child_process').exec
 
 module.exports = (webdriverConf, customBefore) ->
@@ -54,7 +55,9 @@ module.exports = (webdriverConf, customBefore) ->
       envStr = for key, value of webdriverConf.server.env
         "#{ key }=#{ value }"
       envStr = envStr.join ' '
-      global.__runningServer = exec "#{ envStr } #{ webdriverConf.server.startCommand }"
+      global.__runningServer = spawn '/bin/sh',
+          ['-c', "#{ envStr } #{ webdriverConf.server.startCommand }"],
+          { detached: true }
       global.__runningServer.stdout.on 'data', (data) ->
         console.log data
       global.__runningServer.stderr.on 'data', (data) ->
