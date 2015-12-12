@@ -60,7 +60,7 @@ module.exports = (webdriverConf, customBefore) ->
       global.__runningServer.stderr.on 'data', (data) ->
         console.log data
       global.__runningServer.on 'exit', (code) ->
-        'Server exited with code ' + code
+        console.log 'Server exited with code ' + code
         global.__runningServerExited = true
       undefined
     # Wait for server to start
