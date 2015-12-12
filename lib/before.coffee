@@ -59,9 +59,9 @@ module.exports = (webdriverConf, customBefore) ->
           ['-c', "#{ envStr } #{ webdriverConf.server.startCommand }"],
           { detached: true }
       global.__runningServer.stdout.on 'data', (data) ->
-        console.log data
+        console.log data.toString('utf8')
       global.__runningServer.stderr.on 'data', (data) ->
-        console.log data
+        console.log data.toString('utf8')
       global.__runningServer.on 'exit', (code) ->
         console.log 'Server exited with code ' + code
         global.__runningServerExited = true
