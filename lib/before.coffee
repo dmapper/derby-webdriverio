@@ -1,17 +1,17 @@
+Bluebird = require 'bluebird'
+natural = require 'natural'
+nounInflector = new natural.NounInflector()
+_ = require 'lodash'
+chai = require 'chai'
+chaiAsPromised = require 'chai-as-promised'
+webdriverio = require 'webdriverio'
+global.X = require './xpath'
+addCustomCommands = require './commands'
+waitServer = require './waitServer'
+exec = require('child_process').exec
+
 module.exports = (webdriverConf, customBefore) ->
   ->
-    Bluebird = require 'bluebird'
-    natural = require 'natural'
-    nounInflector = new natural.NounInflector()
-    shell = require 'shelljs'
-    _ = require 'lodash'
-    chai = require 'chai'
-    chaiAsPromised = require 'chai-as-promised'
-    webdriverio = require 'webdriverio'
-    global.X = require './xpath'
-    addCustomCommands = require './commands'
-    waitServer = require './waitServer'
-
     for groupName, value of webdriverConf.browsers
       if value in [1, true]
         global[groupName] = webdriverio.remote webdriverConf
@@ -43,7 +43,9 @@ module.exports = (webdriverConf, customBefore) ->
     # Clean test DB
     .then ->
       dbName = webdriverConf.server.env.MONGO_URL.match(/\/([^\/]*)$/)?[1]
-      shell.exec "mongo #{ dbName } --eval \"db.dropDatabase();\""
+      new Bluebird (resolve, reject) ->
+        exec "mongo #{ dbName } --eval \"db.dropDatabase();\"", ->
+          resolve()
     # Run custom before hook
     .then ->
       customBefore?()
@@ -52,7 +54,7 @@ module.exports = (webdriverConf, customBefore) ->
       envStr = for key, value of webdriverConf.server.env
         "#{ key }=#{ value }"
       envStr = envStr.join ' '
-      global.__runningServer = shell.exec "#{ envStr } #{ webdriverConf.server.startCommand }", async: true
+      global.__runningServer = exec "#{ envStr } #{ webdriverConf.server.startCommand }"
       undefined
     # Wait for server to start
     .then ->
