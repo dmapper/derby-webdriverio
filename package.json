@@ -1,6 +1,6 @@
 {
   "name": "derby-webdriverio",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Webdriver.io for Derby.js",
   "main": "index.js",
   "scripts": {
