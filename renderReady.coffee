@@ -1,8 +1,18 @@
 module.exports = (app, waitTimeout = 10) ->
 
-  app.on 'ready', ->
-    setTimeout (-> window._rendered = true), waitTimeout
+  setPageRendered: ->
+    return if app.derby.util.isServer
+    setTimeout ->
+      window._rendered = true
+      document.documentElement.classList.add '__rendered'
+    , 10
 
-  app.on 'routeDone', ->
-    unless app.derby.util.isServer
-      setTimeout (-> window._rendered = true), waitTimeout
+  removePageRendered: ->
+    return if app.derby.util.isServer
+    delete window._rendered
+    document.documentElement.classList.remove '__rendered'
+
+  app.on 'ready', setPageRendered
+  app.on 'route', removePageRendered
+  app.on 'routeDone', setPageRendered
+
