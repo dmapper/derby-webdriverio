@@ -84,8 +84,14 @@ module.exports = (browser) ->
       , timeout
 
   browser.addCommand 'urlAndWait', ->
+    isReact = null
     @url.apply this, arguments
+    .execute ->
+      window.IS_REACT
+    .then (ret) ->
+      isReact = ret.value
     .waitUntil ->
+      return @pause(5000).then(-> true) if isReact
       @execute ->
         window._rendered
       .then (ret) ->
