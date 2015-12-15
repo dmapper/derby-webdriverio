@@ -27,7 +27,12 @@ module.exports = (browser) ->
   browser.addCommand 'historyPush', (url) ->
     @execute (url) ->
       delete window._rendered
-      app.history.push(url)
+      _push = (url) ->
+        if app.history?
+          app.history.push url
+        else
+          history.pushState {}, '', url
+      _push url
     , url
     .waitUntil ->
       @execute ->
@@ -38,7 +43,12 @@ module.exports = (browser) ->
   browser.addCommand 'historyRefresh', ->
     @execute ->
       delete window._rendered
-      app.history.refresh()
+      _refresh = ->
+        if app.history?
+          app.history.refresh()
+        else
+          history.pushState {}, '', (location.pathname + location.search)
+      _refresh()
     .waitUntil ->
       @execute ->
         window._rendered
@@ -53,14 +63,20 @@ module.exports = (browser) ->
     ->
       timeout = arguments[arguments.length - 1]
       args = arguments
+      isReact = null
       if typeof timeout is 'number'
         args = Array.prototype.slice.call arguments, 1
       else
         timeout = undefined
-      @execute(->
+      @execute ->
+        return true if window.IS_REACT
         delete window._rendered
+        false
+      .then((ret) ->
+        isReact = ret.value
       )[fnName].apply(this, args)
       .waitUntil ->
+        return @pause(5000).then(-> true) if isReact
         @execute ->
           window._rendered
         .then (ret) ->
