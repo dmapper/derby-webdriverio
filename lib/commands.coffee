@@ -90,7 +90,7 @@ module.exports = (browser) ->
           done = arguments[arguments.length - 1]
           lastArgIndex = arguments.length - 1
         args = Array.prototype.slice.call(arguments, 2, lastArgIndex)
-        res = app.model[method].apply app.model, args.concat [->
+        res = (app.model || model)[method].apply (app.model || model), args.concat [->
           done? res
         ]
       , method, !!isAsync].concat(Array.prototype.slice.call(arguments))
@@ -128,7 +128,7 @@ module.exports = (browser) ->
 
   browser.addCommand 'waitForModel', ->
     @executeAsync (cb) ->
-      _pingId = '__ping_' + app.model.id()
-      app.model.add 'service', {id: _pingId}, cb
+      _pingId = '__ping_' + (app.model || model).id()
+      (app.model || model).add 'service', {id: _pingId}, cb
     .then (ret) ->
       ret.value
