@@ -50,6 +50,7 @@ module.exports = (customConfig) ->
     config.desiredCapabilities.chromeOptions ?= {}
     config.desiredCapabilities.chromeOptions.args ?= ['no-sandbox']
     config.desiredCapabilities.chromeOptions.binary ?= __dirname + '/chrome-linux/chrome'
+    config.desiredCapabilities.firefox_binary = '/usr/local/bin/firefox'
 
   # Add custom commands and init browsers
   config.before = require('./lib/before')(config, config.before)
