@@ -97,6 +97,7 @@ module.exports = (browser) ->
       .then (ret) ->
         ret.value
   browser.addCommand 'clickAndWait', makeWaitForPageLoad('click')
+  browser.addCommand 'elementIdClickAndWait', makeWaitForPageLoad('elementIdClick')
   browser.addCommand 'submitFormAndWait', makeWaitForPageLoad('submitForm')
 
   # Racer Model
