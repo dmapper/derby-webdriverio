@@ -4,16 +4,16 @@ module.exports = (browser) ->
   # -----------------------------------------------------
 
   browser.addCommand 'shouldExist', ->
-    @waitForExist(X.apply(null, arguments)).should.eventually.be.true
+    @waitForExist.apply(this, arguments).should.eventually.be.true
 
-  browser.addCommand 'shouldNotExist', ->
-    @waitForExist(X.apply(null, arguments), undefined, true).should.eventually.be.true
+  browser.addCommand 'shouldNotExist', (selector) ->
+    @waitForExist(selector, undefined, true).should.eventually.be.true
 
   browser.addCommand 'shouldBeVisible', ->
-    @waitForVisible(X.apply(null, arguments)).should.eventually.be.true
+    @waitForVisible.apply(this, arguments).should.eventually.be.true
 
-  browser.addCommand 'shouldNotBeVisible', ->
-    @waitForVisible(X.apply(null, arguments), undefined, true).should.eventually.be.true
+  browser.addCommand 'shouldNotBeVisible', (selector) ->
+    @waitForVisible(selector, undefined, true).should.eventually.be.true
 
   browser.addCommand 'shouldExecute', ->
     @execute.apply this, arguments

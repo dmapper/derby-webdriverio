@@ -5,7 +5,6 @@ _ = require 'lodash'
 chai = require 'chai'
 chaiAsPromised = require 'chai-as-promised'
 webdriverio = require 'webdriverio'
-global.X = require './xpath'
 addCustomCommands = require './commands'
 waitServer = require './waitServer'
 spawn = require('child_process').spawn
