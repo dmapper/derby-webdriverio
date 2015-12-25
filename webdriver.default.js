@@ -1,8 +1,8 @@
 var defaultTimeout = process.env.TIMEOUT
   ? ~~process.env.TIMEOUT
   : process.env.BROWSER === 'firefox'
-    ? 70000
-    : 40000
+    ? 90000
+    : 60000
 
 module.exports = {
   desiredCapabilities: {
