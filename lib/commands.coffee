@@ -59,29 +59,24 @@ module.exports = (browser) ->
   # -----------------------------------------------------
 
   makeWaitForPageLoad = (fnName) ->
-    # Adds additional last argument -- timeout in ms (time to wait for the page to load)
     ->
-      timeout = arguments[arguments.length - 1]
       args = arguments
       isReact = null
-      if typeof timeout is 'number'
-        args = Array.prototype.slice.call arguments, 1
-      else
-        timeout = undefined
       @execute ->
         return true if window.IS_REACT
         delete window._rendered
         false
-      .then((ret) ->
+      .then (ret) ->
         isReact = ret.value
-      )[fnName].apply(this, args)
-      .waitUntil ->
-        return @pause(5000).then(-> true) if isReact
-        @execute ->
-          window._rendered
-        .then (ret) ->
-          ret.value
-      , timeout
+      .then ->
+        @[fnName].apply(this, args)
+      .then ->
+        @waitUntil ->
+          return @pause(5000).then(-> true) if isReact
+          @execute ->
+            window._rendered
+          .then (ret) ->
+            ret.value
 
   browser.addCommand 'urlAndWait', ->
     isReact = null
@@ -90,12 +85,13 @@ module.exports = (browser) ->
       window.IS_REACT
     .then (ret) ->
       isReact = ret.value
-    .waitUntil ->
-      return @pause(5000).then(-> true) if isReact
-      @execute ->
-        window._rendered
-      .then (ret) ->
-        ret.value
+    .then ->
+      @waitUntil ->
+        return @pause(5000).then(-> true) if isReact
+        @execute ->
+          window._rendered
+        .then (ret) ->
+          ret.value
   browser.addCommand 'clickAndWait', makeWaitForPageLoad('click')
   browser.addCommand 'elementIdClickAndWait', makeWaitForPageLoad('elementIdClick')
   browser.addCommand 'submitFormAndWait', makeWaitForPageLoad('submitForm')
