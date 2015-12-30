@@ -138,24 +138,6 @@ Refresh the page using `app.history.refresh` on the client.
 
 ---
 
-### `X()` - XPath function
-
-XPath helper function, provides better support for querying text nodes.
-Available globally as `X`
-
-##### `X([selector], text)`
-
-Returns an XPath selector to find a node which holds `text`.
-Optionally you can specify a CSS3 selector to narrow the lookup.
-
-```coffee
-browser
-# Click on a `<button>` within `<form class='main'>` that has `Submit` text.
-.click X 'form.main button', 'Submit'
-```
-
----
-
 ### Chai shorthands
 
 A bunch of useful shorthand methods to test things.
