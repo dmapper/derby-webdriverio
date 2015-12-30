@@ -166,8 +166,8 @@ All of them accept the arguments which will be passed to `X()` function.
 ```coffee
 browser
 # Note that the arguments passed here are `X()` function arguments
-.shouldExist 'form.main button', 'Submit'
-.shouldExist 'Welcome to my Website'
+.shouldExist 'form.main button *= Submit'
+.shouldExist '*= Welcome to my Website'
 ```
 
 ##### `shouldNotExist()`
