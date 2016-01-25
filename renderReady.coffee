@@ -5,7 +5,7 @@ module.exports = (app, waitTimeout = 10) ->
     setTimeout ->
       window._rendered = true
       document.documentElement.classList.add '__rendered'
-    , 10
+    , waitTimeout
 
   removePageRendered = ->
     return if app.derby.util.isServer
