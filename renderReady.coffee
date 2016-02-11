@@ -15,8 +15,8 @@ module.exports = (app, waitTimeout = 10) ->
         window._rendered = true
         document.documentElement.classList.add '__rendered'
       , waitTimeout
-    # When running tests in dev, wait until webpack dev server loads styles
-    if initial and window.env?.NODE_ENV isnt 'production'
+    # [webpack] When running tests in dev, wait until webpack dev server loads styles
+    if initial and app.webpack and window.env?.NODE_ENV isnt 'production'
       waitWds _setPageRendered
     else
       _setPageRendered()
