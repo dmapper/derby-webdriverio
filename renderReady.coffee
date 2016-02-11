@@ -11,7 +11,7 @@ module.exports = (app, waitTimeout = 10) ->
 
   setPageRendered = (initial) ->
     return if app.derby.util.isServer
-    _setPageRendered =
+    _setPageRendered = ->
       setTimeout ->
         window._rendered = true
         document.documentElement.classList.add '__rendered'
