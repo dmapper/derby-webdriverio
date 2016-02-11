@@ -2,6 +2,7 @@ module.exports = (app, waitTimeout = 10) ->
 
   waitWds = (cb) ->
     _waitWds = ->
+      # wds is written into html element when webpack client loads (see derby-webpack)
       if document.documentElement.dataset.wds
         cb()
       else
