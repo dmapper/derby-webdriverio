@@ -40,7 +40,7 @@
     "derby-dev-helpers": "^0.1.2"
   },
   "peerDependencies": {
-    "webdriverio": "^3.3",
+    "webdriverio": ">=4.0.0 <5.0.0 || >=400.0.0 <500.0.0",
     "mocha": "^2.3",
     "chai": "^3.4"
   }
