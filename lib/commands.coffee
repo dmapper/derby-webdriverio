@@ -34,7 +34,7 @@ module.exports = (browser) ->
           history.pushState {}, '', url
       _push url
     , url
-    .waitUntil ->
+    .waitUntil =>
       @execute ->
         window._rendered
       .then (ret) ->
@@ -49,7 +49,7 @@ module.exports = (browser) ->
         else
           history.pushState {}, '', (location.pathname + location.search)
       _refresh()
-    .waitUntil ->
+    .waitUntil =>
       @execute ->
         window._rendered
       .then (ret) ->
@@ -68,10 +68,10 @@ module.exports = (browser) ->
         false
       .then (ret) ->
         isReact = ret.value
-      .then ->
+      .then =>
         @[fnName].apply(this, args)
-      .then ->
-        @waitUntil ->
+      .then =>
+        @waitUntil =>
           return @pause(5000).then(-> true) if isReact
           @execute ->
             window._rendered
@@ -85,8 +85,8 @@ module.exports = (browser) ->
       window.IS_REACT
     .then (ret) ->
       isReact = ret.value
-    .then ->
-      @waitUntil ->
+    .then =>
+      @waitUntil =>
         return @pause(5000).then(-> true) if isReact
         @execute ->
           window._rendered
