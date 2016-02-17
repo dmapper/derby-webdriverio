@@ -37,8 +37,9 @@ module.exports = (customConfig) ->
 
   # Default tester settings
   _.defaults config,
+    sync: false  # Use async version by default which is the same as in v3
     framework: 'mocha'
-    reporter: 'spec'
+    reporters: ['dot']
     mochaOpts:
       ui: 'bdd'
       compilers: ['coffee:coffee-script/register'] if hasCoffee
