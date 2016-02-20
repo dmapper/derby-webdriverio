@@ -1,4 +1,6 @@
 Bluebird = require 'bluebird'
+natural = require 'natural'
+nounInflector = new natural.NounInflector()
 
 module.exports = (webdriverConf, customAfter) ->
   (failures, pid) ->
@@ -6,8 +8,15 @@ module.exports = (webdriverConf, customAfter) ->
     Bluebird
     .resolve()
     .then ->
+      # Kill browsers one by one
       Bluebird.mapSeries Object.keys(webdriverConf.browsers), (groupName) ->
-        global[groupName].end()
+        amount = webdriverConf.browsers[groupName]
+        if amount in [1, true]
+          global[groupName].end()
+        else
+          singularName = nounInflector.singularize groupName
+          Bluebird.mapSeries [0 ... amount], (i) ->
+            global[groupName].select(singularName + i).end()
     .then ->
       console.log 'Kill Server'
       new Bluebird (resolve, reject) ->
