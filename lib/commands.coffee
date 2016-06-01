@@ -95,6 +95,10 @@ module.exports = (browser) ->
   browser.addCommand 'clickAndWait', makeWaitForPageLoad('click')
   browser.addCommand 'elementIdClickAndWait', makeWaitForPageLoad('elementIdClick')
   browser.addCommand 'submitFormAndWait', makeWaitForPageLoad('submitForm')
+  browser.addCommand 'selectByVisibleTextAndWait', makeWaitForPageLoad('selectByVisibleText')
+  browser.addCommand 'selectByValueAndWait', makeWaitForPageLoad('selectByValue')
+  browser.addCommand 'selectByIndexAndWait', makeWaitForPageLoad('selectByIndex')
+  browser.addCommand 'selectByAttributeAndWait', makeWaitForPageLoad('selectByAttribute')
 
   # Racer Model
   # -----------------------------------------------------
