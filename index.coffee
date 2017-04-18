@@ -3,6 +3,8 @@ _ = require 'lodash'
 
 module.exports = (customConfig) ->
 
+  { TRAVIS, SS_HOST, SS_PORT, SS_PATH } = process.env
+
   config = _.defaults {}, customConfig, webdriverDefaultConf,
     specs: [
       './test/e2e/**/*.js'
@@ -46,11 +48,15 @@ module.exports = (customConfig) ->
       bail: true
 
   # Special settings for Chrome builds on Travis
-  if (process.env.TRAVIS)
+  if TRAVIS
     config.desiredCapabilities.chromeOptions ?= {}
     config.desiredCapabilities.chromeOptions.args ?= ['no-sandbox']
     config.desiredCapabilities.chromeOptions.binary ?= '/usr/bin/chromium-browser'
     config.desiredCapabilities.firefox_binary = '/usr/local/bin/firefox'
+
+  config.host = SS_HOST if SS_HOST
+  config.port = SS_PORT if SS_PORT
+  config.path = SS_PATH if SS_PATH
 
   # Add custom commands and init browsers
   config.before = require('./lib/before')(config, config.before)
