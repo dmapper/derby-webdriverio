@@ -85,6 +85,7 @@ module.exports = (browser) ->
       window.IS_REACT
     .then (ret) ->
       isReact = ret.value
+    .end()
     .then ->
       @waitUntil ->
         return @pause(5000).then(-> true) if isReact
@@ -92,6 +93,7 @@ module.exports = (browser) ->
           window._rendered
         .then (ret) ->
           ret.value
+    .end()
   browser.addCommand 'clickAndWait', makeWaitForPageLoad('click')
   browser.addCommand 'elementIdClickAndWait', makeWaitForPageLoad('elementIdClick')
   browser.addCommand 'submitFormAndWait', makeWaitForPageLoad('submitForm')
