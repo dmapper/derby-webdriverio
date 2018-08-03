@@ -1,7 +1,7 @@
 Bluebird = require 'bluebird'
 natural = require 'natural'
 nounInflector = new natural.NounInflector()
-_ = require 'lodash'
+isNumber = require 'lodash/isNumber'
 chai = require 'chai'
 chaiAsPromised = require 'chai-as-promised'
 webdriverio = require 'webdriverio'
@@ -15,7 +15,7 @@ module.exports = (webdriverConf, customBefore) ->
     for groupName, value of webdriverConf.browsers
       if value in [1, true]
         global[groupName] = webdriverio.remote webdriverConf
-      else if _.isNumber(value) and value > 0
+      else if isNumber(value) and value > 0
         global[groupName] = webdriverio.multiremote do ->
           res = {}
           singularName = nounInflector.singularize groupName

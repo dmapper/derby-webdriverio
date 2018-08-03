@@ -6,12 +6,12 @@
 net = require 'net'
 request = require 'request'
 once = require 'once'
-_ = require 'lodash'
+defaults = require 'lodash/defaults'
 Bluebird = require 'bluebird'
 
 module.exports = (options) ->
   new Bluebird (resolve, reject) ->
-    options = _.defaults {}, options,
+    options = defaults {}, options,
       timeout: 10 * 1000
       interval: 800
       print: true

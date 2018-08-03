@@ -1,11 +1,12 @@
 webdriverDefaultConf = require './webdriver.default'
-_ = require 'lodash'
+defaults = require 'lodash/defaults'
+defaultsDeep = require 'lodash/defaultsDeep'
 
 module.exports = (customConfig) ->
 
   { TRAVIS, SS_HOST, SS_PORT, SS_PATH } = process.env
 
-  config = _.defaults {}, customConfig, webdriverDefaultConf,
+  config = defaults {}, customConfig, webdriverDefaultConf,
     specs: [
       './test/e2e/**/*.js'
       './test/e2e/**/*.coffee'
@@ -19,7 +20,7 @@ module.exports = (customConfig) ->
     capabilities: {}
 
   config.server ?= {}
-  _.defaultsDeep config.server,
+  defaultsDeep config.server,
     startCommand: 'npm start'
     env:
       MONGO_URL: 'mongodb://localhost:27017/test'
@@ -38,7 +39,7 @@ module.exports = (customConfig) ->
     hasCoffee = false
 
   # Default tester settings
-  _.defaults config,
+  defaults config,
     framework: 'mocha'
     reporter: 'spec'
     mochaOpts:
